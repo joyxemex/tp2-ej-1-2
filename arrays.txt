@@ -1,0 +1,253 @@
+/**
+ * Array
+        Si quiero obtener la cantidad de  elementos
+        - length
+  
+        Si quiero recorrer los elementos sin indice
+        - for...of
+  
+        Si quiero recorrer los indices
+        - for...in
+  
+        Si quiero obtener el indice de un elemento
+        - indexOf
+  
+        Si quiere saber si hay un elemento
+        - includes
+  
+        Si quiero transformar todos los elementos mediante una funcion
+        - map
+  
+        Si quiero filtrar todos los elementos que pasan un filtro
+        - filter
+  
+        Si quiero obtener el primer elemento que pasa un filtro
+        - find
+  
+        Si quiero saber si todos los elementos cumple una condicion
+        - every
+  
+        Si quiero saber si alguno de los elementos cumple una condicion
+        - some 
+
+        Si quiero convertir (reducir) todos los elementos de un array a un unico valor (numero, string, objeto,etc)
+        - reduce
+
+        - pop
+        - push
+        - shift
+        - unshift
+        - slice
+        - splice             
+*/ 
+
+ const animales = ['Perro', 'Gato', 'Hamster', 'Caballo', 'Vaca'];
+
+
+/** length: nos devuelve la cantidad de elementos que tiene ese array, siempre es un numero que el indice maximo
+*/
+
+console.log('array.length');
+console.log(animales.length) // 5
+
+ /** for...of es un bucle que recorre todos los elementos del array y por cada vuelta obtenemos en la variable guardada entre parentesis el elemento que estamos recorriendo
+
+ for (const elemento of elementos) {
+
+ }
+
+ Donde elementos es el array que queremos recorrer y elemento va a ir valiendo en cada vuelta cada uno de los valores que contiene el array
+
+ Se lee "por cada elemento de elementos, hacer..."
+
+ Aca no obtenemos el indice
+  */ 
+
+console.log('for...of');
+for (const animal of animales) {
+    console.log(animal);
+} 
+
+ /** 
+    for...in es un bucle que recorre todos los elementos del array y por cada vuelta obtenemos en la variable guardada entre parentesis el indice[i] del elemento que estamos recorriendo
+
+    for (const i of elementos) {
+        elementos[i]
+    }
+
+ Donde elementos es el array que queremos recorrer y elemento va a ir valiendo en cada vuelta cada uno de los indices que contiene el array
+
+ Se lee "por cada indice de elementos, hacer..."
+     
+ */ 
+
+ console.log('for...in');
+ for (const i in animales) {
+    console.log(animales[i]);
+} 
+
+/**
+ indexOf es un metodo que nos devuelve el indice del primer elemento de un array que coincide con el que se le pasa por parentesis, o -1 si ese elemento no se encuentra, la sintaxis es 
+ array.indexOf(elemento)
+
+ indexOf acepta un segundo parametro opcional, que es el indice a partir del cual empieza a buscar elementos, p. ej.
+
+ array.indexOf(elemento, indice)
+ */
+
+console.log('indexOf');
+
+console.log(animales.indexOf('Gato')); // 1
+console.log(animales.indexOf('Elefante')); // -1
+
+/**
+ includes
+
+ es un metodo que devuelve true si el array contiene el elemento que se le pasa como parametro, o false si no. La sintaxis es
+
+ array.includes(elemento)
+ */
+
+console.log('includes');
+
+console.log(animales.includes('Vaca')); // true
+console.log(animales.includes('Elefante')); // false
+ 
+/** 
+ map
+
+ es un metodo que toma por parametro un callback (o sea, una funcion). 
+ Map lo que hace es recorrer cada elemento de ese array y usarlo como parametro del callback.
+ Es decir, el parametro del callback va a ser siempre el elemento actual del array que se esta recorriendo.
+ Por cada vez que se ejecuta un callback, el resultado que dicho callback devuelve se guarda en un nuevo array.
+ El callback tiene que devolver el elemento a agregar.
+ La sintaxis es:
+
+ const callback = elemento => return elemento;
+ const nuevoArray = array.map(callback);
+ */
+ 
+ console.log('map');
+
+ const agregarMensaje = animal => `Animal: ${animal}`; 
+ const animalesConMensaje = animales.map(agregarMensaje);
+ 
+ console.log(animalesConMensaje);
+
+ const nombresArtistas = artistas.map(artista => artista.nombre);
+    
+ const artistasConNombreYEdad = artistas.map(artista => {
+     return { 
+         nombre: artista.nombre, 
+         edad: artista.edad 
+     }
+});
+
+/**
+ filter
+ 
+ es un metodo que toma por parametro un callback (o sea, una funcion). 
+ Filter recorre cada elemento de ese array y usarlo como parametro del callback.
+ Es decir, el parametro del callback va a ser siempre el elemento actual del array que se esta recorriendo.
+ Por cada vez que se ejecuta un callback, si dicho callback devuelve true, el elemento se agrega a un nuevo array, de lo contrario no.
+ El callback tiene que devolver true o false.
+ La sintaxis es:
+
+ const date = ventas => return true;
+ const filtrados =ventas.filter(date);
+ 
+
+console.log('filter');
+
+
+const conMasDiscos = artista => artista.discos.length > 5;
+
+const artistasConMasDiscos = artistas.filter(conMasDiscos); 
+
+console.log(artistasConMasDiscos);
+
+/**
+ * find
+ * 
+ * find funciona exactamente igual que filter pero solamente devuelve un resultado, el primero que pasa el filtro que se pasa como parametro. A diferencia de filter que devuelve un array por mas que haya un solo elemento, find solamente devuelve el primero.
+ La sintaxis es:
+
+ const callback = elemento => return true;
+ const primerElemento = array.find(callback);
+ 
+ */
+console.log('find');
+
+const artistaConMasDiscos = artistas.find(conMasDiscos); 
+
+console.log(artistaConMasDiscos);
+
+// artistas.reverse()
+// artistas.find(conMasDiscos)
+
+/** every
+
+ es un metodo que acepta un callback. Por cada elemento del array va a ejecutar dicho callback, pasandole al callback el elemento actual como parametro. 
+ Si todos los callbacks devuelven true, el resultado final de every es true, si alguno devuelve false, el resultado final es false.
+ O sea, devuelve true si todos los elementos de un array cumplen una cierta condicion.
+
+ La sintaxis es:
+
+ const callback = elemento => return true;
+ const cumplenCondicion = array.every(callback)
+*/
+
+console.log('every');
+
+const artistasTienenMasDe5Discos = artistas.every(conMasDiscos); 
+
+console.log(artistasTienenMasDe5Discos);
+
+/** some
+
+ es un metodo que acepta un callback. Por cada elemento del array va a ejecutar dicho callback, pasandole al callback el elemento actual como parametro. 
+ A diferencia del every, basta con que alguno de los callbacks devuelva true, para que el resultado final de some sea true, si todos devuelven false, el resultado final es false.
+ O sea, devuelve true si al menos uno de los elementos de un array cumplen una cierta condicion, y false si ninguno de ellos lo hace.
+
+ La sintaxis es:
+
+ const callback = elemento => return true;
+ const cumplenCondicion = array.some(callback)
+*/
+
+console.log('some');
+
+const algunArtistaTieneMasDe5Discos = artistas.some(conMasDiscos); 
+
+console.log(algunArtistaTieneMasDe5Discos);
+
+/**
+ reduce
+  
+ es un metodo que recorre todos los elementos de un array y devuelve un resultado final ("los reduce").
+ Para hacer eso, por cada elemento ejecuta un callback, dicho callback tiene dos parametros: el total (hasta el momento) y el elemento que se esta recorriendo.
+ El callback tiene que devolver el valor del total, que luego pasa a la siguiente vuelta (o al siguiente elemento) manteniendo su valor (se acumula).
+ Finalmente, se devuelve el resultado del valor total final.
+ La sintaxis:
+
+ const reductor = (total, elemento) => total;
+ const resultado = array.reduce(reductor);
+
+ Reduce tambien puede tomar un segundo parametro opcional que indica el valor con el que va iniciar el parametro total (en vez de que sea el primer elemento del array)
+ */
+
+const numeros = [2, 4, 6, 12];
+const sumar = (total, numero) => total += numero; 
+const sumaTotal = numeros.reduce(sumar);
+
+console.log('reduce');
+console.log(sumaTotal);
+
+const cantidadAnimales = animales.reduce((objeto, animal) => {
+    objeto.cantidadDeAnimales++;
+    return objeto;
+}, {
+    cantidadDeAnimales: 0
+});
+
+console.log(cantidadAnimales);
